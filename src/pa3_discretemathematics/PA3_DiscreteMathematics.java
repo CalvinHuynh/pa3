@@ -17,7 +17,7 @@ public class PA3_DiscreteMathematics {
     public static void main(String[] args) throws Exception {
         Stopwatch stopwatch = new Stopwatch();
         
-        String filePath = "C:\\Users\\Calvin\\Desktop\\pa3_message_to_encode.txt";
+        String filePath = "C:\\Users\\Calvin\\Desktop\\simple_text.txt";
         int prime = 23449;
         int e;
         
@@ -45,19 +45,17 @@ public class PA3_DiscreteMathematics {
         }
         
         System.out.println("");
-        System.out.println(Utility.readFile(filePath));
         
         List<Long> temp = MathHelper.findCommonRelativePrimes(devisorsOfP, devisorsOfQ);
         System.out.println("Lowest e is: " + temp.get(0));
-//        System.out.println((3^(-1) % 23140));
-//        char testChar = ' ';
-//        char testA = 'A';
-//        System.out.println("space is: " + (int)testChar + "\nA is: " + (int)testA);
-
-        double tempInt = Math.pow(715,7);
-       
-        BigInteger b1 = new BigInteger(Double.toString(tempInt));
-        System.out.println(b1);
+        
+        String content = Utility.readFile(filePath);
+        List<Integer> convertedContent = Utility.stringToHex(content);
+        List<BigInteger> encodedContent = Utility.encodeContent(convertedContent, temp.get(0).intValue(), prime);
+        for (BigInteger encoded : encodedContent) {
+            System.out.print(encoded + ",");
+        }
+        
     }
 
 }
