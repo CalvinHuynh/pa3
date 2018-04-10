@@ -1,4 +1,4 @@
-package pa3_discretemathematics;
+package pa3_encode;
 
 /******************************************************************************
  *  Compilation:  javac Stopwatch.java

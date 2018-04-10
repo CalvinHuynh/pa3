@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pa3_discretemathematics;
+package pa3_encode;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -17,17 +17,15 @@ public class PA3_DiscreteMathematics {
     public static void main(String[] args) throws Exception {
         Stopwatch stopwatch = new Stopwatch();
         
-        String filePath = "C:\\Users\\Calvin\\Desktop\\pa3_test.txt";
-        int prime = 23449;
+        String filePath = "C:\\Users\\Calvin\\Desktop\\pa3_message_to_encode.txt";
+        int prime = 20291;
         
         System.out.println("Primefactors of " + prime);
         List<Long> pf = MathHelper.calculatePrimeFactors(prime);
         System.out.println("Prime factors are:");
         System.out.println("p is " + pf.get(0));
         System.out.println("q is " + pf.get(1));
-//        for (Long number : pf) {
-//            System.out.println(number);
-//        }
+        
         System.out.println("n is the result of " + pf.get(0) + " * " + pf.get(1) +
                 " = " + pf.get(0) * pf.get(1));
         System.out.println("Elapsed time: " + stopwatch.elapsedTime() + "ms");

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pa3_discretemathematics;
+package pa3_encode;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -106,8 +106,8 @@ public class Utility {
         BigInteger e = new BigInteger(Integer.toString(exponent));
         BigInteger n = new BigInteger(Integer.toString(number));
         
-        for (Integer decimal : decimals) {
-            BigInteger b1 = new BigInteger(Integer.toString(decimal));
+        for (Integer decimalItem : decimals) {
+            BigInteger b1 = new BigInteger(Integer.toString(decimalItem));
             encodedContent.add(b1.modPow(e, n));
         }
         
