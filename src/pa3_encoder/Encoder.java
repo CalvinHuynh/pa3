@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package pa3_encode;
+package pa3_encoder;
 
 import java.math.BigInteger;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  *
  * @author Calvin
  */
-public class PA3_DiscreteMathematics {
+public class Encoder {
 
     public static void main(String[] args) throws Exception {
         Stopwatch stopwatch = new Stopwatch();
@@ -54,9 +50,15 @@ public class PA3_DiscreteMathematics {
         List<Integer> convertedContent = Utility.stringToDecimal(content);
         List<BigInteger> encodedContent = Utility.encodeContent(convertedContent, 
                 commonRelativePrimes.get(0).intValue(), prime);
-        for (BigInteger encoded : encodedContent) {
-            System.out.print(encoded + ",");
+        for (Iterator<BigInteger> it = encodedContent.iterator(); it.hasNext();) {
+            BigInteger encoded = it.next();
+            System.out.print(encoded);
+            if(it.hasNext()){
+                System.out.print(",");
+            }
         }
+        
+        System.out.println("");
         System.out.println("Elapsed time: " + stopwatch.elapsedTime() + "ms");
         
     }

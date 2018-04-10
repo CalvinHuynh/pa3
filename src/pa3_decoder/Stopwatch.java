@@ -1,4 +1,4 @@
-package pa3_encode;
+package pa3_decoder;
 
 /******************************************************************************
  *  Compilation:  javac Stopwatch.java
