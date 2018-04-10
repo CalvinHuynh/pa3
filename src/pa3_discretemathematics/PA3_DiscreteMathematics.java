@@ -17,44 +17,49 @@ public class PA3_DiscreteMathematics {
     public static void main(String[] args) throws Exception {
         Stopwatch stopwatch = new Stopwatch();
         
-        String filePath = "C:\\Users\\Calvin\\Desktop\\simple_text.txt";
+        String filePath = "C:\\Users\\Calvin\\Desktop\\pa3_test.txt";
         int prime = 23449;
-        int e;
         
         System.out.println("Primefactors of " + prime);
         List<Long> pf = MathHelper.calculatePrimeFactors(prime);
         System.out.println("Prime factors are:");
-        for (Long number : pf) {
-            System.out.println(number);
-        }
-        System.out.println("result of the " + pf.get(0) + "*" + pf.get(1) +
-                " is: " + pf.get(0) * pf.get(1));
+        System.out.println("p is " + pf.get(0));
+        System.out.println("q is " + pf.get(1));
+//        for (Long number : pf) {
+//            System.out.println(number);
+//        }
+        System.out.println("n is the result of " + pf.get(0) + " * " + pf.get(1) +
+                " = " + pf.get(0) * pf.get(1));
         System.out.println("Elapsed time: " + stopwatch.elapsedTime() + "ms");
         
-        List<Long> pfMinusX = MathHelper.calculatePrimeFactorsMinusX(pf, 1);
-        List<Long> devisorsOfP = MathHelper.findListOfDivisors(pfMinusX.get(0));
-        System.out.print("Divisors of " + pfMinusX.get(0) + " = 1");
-        for (Long long1 : devisorsOfP) {
-             System.out.print(", " + long1);
+        Long pMinusX = MathHelper.calculatePrimeFactorsMinusX(pf.get(0), 1);
+        List<Long> devisorsOfP = MathHelper.findListOfDivisors(pMinusX);
+        System.out.print("Divisors of " + pMinusX + " = 1");
+        for (Long devisorOfP : devisorsOfP) {
+             System.out.print(", " + devisorOfP);
         }
+        
         System.out.println("");
-        List<Long> devisorsOfQ = MathHelper.findListOfDivisors(pfMinusX.get(1));
-        System.out.print("Divisors of " + pfMinusX.get(1) + " = 1");
-        for (Long long1 : devisorsOfQ) {
-             System.out.print( ", " + long1);
+        Long qMinusX = MathHelper.calculatePrimeFactorsMinusX(pf.get(1), 1);
+        List<Long> devisorsOfQ = MathHelper.findListOfDivisors(qMinusX);
+        System.out.print("Divisors of " + qMinusX + " = 1");
+        for (Long devisorOfQ : devisorsOfQ) {
+             System.out.print( ", " + devisorOfQ);
         }
         
         System.out.println("");
         
-        List<Long> temp = MathHelper.findCommonRelativePrimes(devisorsOfP, devisorsOfQ);
-        System.out.println("Lowest e is: " + temp.get(0));
+        List<Long> commonRelativePrimes = MathHelper.findCommonRelativePrimes(devisorsOfP, devisorsOfQ);
+        System.out.println("Lowest found e is: " + commonRelativePrimes.get(0));
         
         String content = Utility.readFile(filePath);
-        List<Integer> convertedContent = Utility.stringToHex(content);
-        List<BigInteger> encodedContent = Utility.encodeContent(convertedContent, temp.get(0).intValue(), prime);
+        List<Integer> convertedContent = Utility.stringToDecimal(content);
+        List<BigInteger> encodedContent = Utility.encodeContent(convertedContent, 
+                commonRelativePrimes.get(0).intValue(), prime);
         for (BigInteger encoded : encodedContent) {
             System.out.print(encoded + ",");
         }
+        System.out.println("Elapsed time: " + stopwatch.elapsedTime() + "ms");
         
     }
 

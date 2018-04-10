@@ -54,7 +54,7 @@ public class Utility {
      * @param content string to convert
      * @return List of decimal representation
      */
-    public static List<Integer> stringToHex(String content){
+    public static List<Integer> stringToDecimal(String content){
         char[] characterArray = content.toCharArray();
         List<Integer> list= new ArrayList<>();
         for (char c : characterArray) {

@@ -67,16 +67,12 @@ public class MathHelper {
     /**
      * Subtract x from the primes
      * 
-     * @param primes
+     * @param prime
      * @param substractBy
      * @return
      */
-    public static List<Long> calculatePrimeFactorsMinusX(List<Long> primes, int substractBy) {
-        List<Long> factorsMinusX = new ArrayList<>();
-        for (Long prime : primes) {
-            factorsMinusX.add(prime - substractBy);
-        }
-        return factorsMinusX;
+    public static Long calculatePrimeFactorsMinusX(Long prime, int substractBy) {
+        return prime - substractBy;
     }
 
     /**
