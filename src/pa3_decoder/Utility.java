@@ -22,7 +22,7 @@ public class Utility {
 
     /**
      * Read content from filename
-     * 
+     *
      * @param fileName name of the file including the absolute path
      * @return string content
      * @throws IOException
@@ -47,16 +47,16 @@ public class Utility {
         }
         return "";
     }
-    
+
     /**
      * Converts the string to the decimal representation
-     * 
+     *
      * @param content string to convert
      * @return List of decimal representation
      */
-    public static List<Integer> stringToDecimal(String content){
+    public static List<Integer> stringToDecimal(String content) {
         char[] characterArray = content.toCharArray();
-        List<Integer> list= new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         for (char c : characterArray) {
             list.add((int) c);
         }
@@ -65,7 +65,7 @@ public class Utility {
 
     /**
      * Creates a hashMap
-     * 
+     *
      * @param <T> type
      * @param listToMap list to convert
      * @return hashMap
@@ -80,9 +80,9 @@ public class Utility {
 
     /**
      * Remove items from hashMap
-     * 
+     *
      * @param <T> Type
-     * @param hashMap 
+     * @param hashMap
      * @param listToRemove list of items to remove
      * @return hashMap with items from the list removed.
      */
@@ -92,25 +92,43 @@ public class Utility {
         }
         return hashMap;
     }
-    
+
     /**
      * Encodes the decimals
-     * 
+     *
      * @param decimals list of decimals to encode
      * @param exponent e
      * @param number n
      * @return List of encoded decimals
      */
-    public static List<BigInteger> encodeContent(List<Integer> decimals, int exponent, int number){
+    public static List<BigInteger> encodeContent(List<Integer> decimals, int exponent, int number) {
         List<BigInteger> encodedContent = new ArrayList<>();
         BigInteger e = new BigInteger(Integer.toString(exponent));
         BigInteger n = new BigInteger(Integer.toString(number));
-        
+
         for (Integer decimalItem : decimals) {
             BigInteger b1 = new BigInteger(Integer.toString(decimalItem));
             encodedContent.add(b1.modPow(e, n));
         }
-        
+
         return encodedContent;
+    }
+
+    public static List<Character> decodeContent(List<Integer> decimals, int exponent, int number) {
+        List<BigInteger> decodedContent = new ArrayList<>();
+        BigInteger e = new BigInteger(Integer.toString(exponent));
+        BigInteger n = new BigInteger(Integer.toString(number));
+
+        for (Integer decimalItem : decimals) {
+            BigInteger b1 = new BigInteger(Integer.toString(decimalItem));
+            decodedContent.add(b1.modPow(e, n));
+        }
+
+        List<Character> charList = new ArrayList<>();
+
+        for (BigInteger bigInt : decodedContent) {
+            charList.add((char) Integer.parseInt(String.valueOf(bigInt)));
+        }
+        return charList;
     }
 }

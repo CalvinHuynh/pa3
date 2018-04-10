@@ -46,8 +46,8 @@ public class Encoder {
         List<Long> commonRelativePrimes = MathHelper.findCommonRelativePrimes(devisorsOfP, devisorsOfQ);
         System.out.println("Lowest found e is: " + commonRelativePrimes.get(0));
         
-        String content = Utility.readFile(filePath);
-        List<Integer> convertedContent = Utility.stringToDecimal(content);
+        String contentToEncode = Utility.readFile(filePath);
+        List<Integer> convertedContent = Utility.stringToDecimal(contentToEncode);
         List<BigInteger> encodedContent = Utility.encodeContent(convertedContent, 
                 commonRelativePrimes.get(0).intValue(), prime);
         for (Iterator<BigInteger> it = encodedContent.iterator(); it.hasNext();) {
