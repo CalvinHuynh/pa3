@@ -1,8 +1,10 @@
 package pa3_encoder;
 
 import java.math.BigInteger;
+import java.sql.Time;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -11,56 +13,50 @@ import java.util.List;
 public class Encoder {
 
     public static void main(String[] args) throws Exception {
-        Stopwatch stopwatch = new Stopwatch();
-        
-        String filePath = "C:\\Users\\Calvin\\Desktop\\pa3_message_to_encode.txt";
-        int prime = 20291;
-        
-        System.out.println("Primefactors of " + prime);
-        List<Long> pf = MathHelper.calculatePrimeFactors(prime);
-        System.out.println("Prime factors are:");
-        System.out.println("p is " + pf.get(0));
-        System.out.println("q is " + pf.get(1));
-        
-        System.out.println("n is the result of " + pf.get(0) + " * " + pf.get(1) +
-                " = " + pf.get(0) * pf.get(1));
-        System.out.println("Elapsed time: " + stopwatch.elapsedTime() + "ms");
-        
-        Long pMinusX = MathHelper.calculatePrimeFactorsMinusX(pf.get(0), 1);
-        List<Long> devisorsOfP = MathHelper.findListOfDivisors(pMinusX);
-        System.out.print("Divisors of " + pMinusX + " = 1");
-        for (Long devisorOfP : devisorsOfP) {
-             System.out.print(", " + devisorOfP);
-        }
-        
-        System.out.println("");
-        Long qMinusX = MathHelper.calculatePrimeFactorsMinusX(pf.get(1), 1);
-        List<Long> devisorsOfQ = MathHelper.findListOfDivisors(qMinusX);
-        System.out.print("Divisors of " + qMinusX + " = 1");
-        for (Long devisorOfQ : devisorsOfQ) {
-             System.out.print( ", " + devisorOfQ);
-        }
-        
-        System.out.println("");
-        
-        List<Long> commonRelativePrimes = MathHelper.findCommonRelativePrimes(devisorsOfP, devisorsOfQ);
-        System.out.println("Lowest found e is: " + commonRelativePrimes.get(0));
-        
-        String contentToEncode = Utility.readFile(filePath);
-        List<Integer> convertedContent = Utility.stringToDecimal(contentToEncode);
-        List<BigInteger> encodedContent = Utility.encodeContent(convertedContent, 
-                commonRelativePrimes.get(0).intValue(), prime);
-        for (Iterator<BigInteger> it = encodedContent.iterator(); it.hasNext();) {
-            BigInteger encoded = it.next();
-            System.out.print(encoded);
-            if(it.hasNext()){
-                System.out.print(",");
-            }
-        }
-        
-        System.out.println("");
-        System.out.println("Elapsed time: " + stopwatch.elapsedTime() + "ms");
-        
-    }
+        //TODO: accept prime (n), optional e (e) and filepath (m) from jar parameters.
+        String filePath = "C:\\Users\\VM\\Desktop\\pa3_message_to_encode.txt";
+        int n = 20291;
 
+        // Calculate prime factors from given prime
+        List<Long> pf = MathHelper.calculatePrimeFactors(n);
+        long p = pf.get(0);
+        long q = pf.get(1);
+        System.out.println("Output of p is: " + p);
+        System.out.println("Output of q is: " + q);
+
+        // Get all the divisors of p - 1
+        List<Long> divisorsOfP = MathHelper.findListOfDivisors(p - 1);
+
+        // Get all the divisors of q - 1
+        List<Long> divisorsOfQ = MathHelper.findListOfDivisors(q - 1);
+
+        // Find all the possible E values
+        List<Long> possibleExponentValues = MathHelper.findCommonRelativePrimes(divisorsOfP, divisorsOfQ);
+
+        // Use lowest E value for a lower execution time.
+        System.out.println("Output of e is: " + possibleExponentValues.get(0));
+
+        // Read the content to encode
+        String contentToEncode = Utility.readFile(filePath);
+
+        // Start the stopwatch to measure encoding time.
+        Stopwatch stopwatch = new Stopwatch();
+
+        // Converts to each letter to a decimal
+        List<Integer> convertedContent = Utility.stringToDecimal(contentToEncode);
+
+        // Calculate encoded value
+        List<Long> encodedContent = Utility.encodeContent(convertedContent,
+                possibleExponentValues.get(0).intValue(), n);
+        System.out.println("Output: Message after encryption is: ");
+        System.out.println(Utility.printEncodedMessage(encodedContent));
+
+        // Display duration of time busy encoding message
+        long elapsedTime = stopwatch.elapsedTime();
+        System.out.println("Output: Amount of time busy encoding was:\n\t" +
+                TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " s\n\t"
+        + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " ms\n\t"
+        + TimeUnit.MICROSECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " μs\n\t"
+        + elapsedTime + " ns");
+    }
 }

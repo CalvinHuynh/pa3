@@ -55,8 +55,8 @@ public class Stopwatch {
      *
      * @return elapsed CPU time (in seconds) since the stopwatch was created
      */
-    public double elapsedTime() {
+    public long elapsedTime() {
         long now = System.currentTimeMillis();
-        return (now - start) / 1000.0;
+        return (now - start);
     }
 } 

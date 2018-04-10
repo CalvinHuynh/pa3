@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -17,7 +18,6 @@ public class Utility {
 
     /**
      * Read content from filename
-     * 
      * @param fileName name of the file including the absolute path
      * @return string content
      * @throws IOException
@@ -38,16 +38,15 @@ public class Utility {
         } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file '"
-                    + fileName + "'");
+                            + fileName + "'");
         }
         return "";
     }
-    
+
     /**
      * Converts the string to the decimal representation
-     * 
      * @param content string to convert
-     * @return List of decimal representation
+     * @return List of Integers with an int representation of the string value
      */
     public static List<Integer> stringToDecimal(String content){
         char[] characterArray = content.toCharArray();
@@ -60,7 +59,6 @@ public class Utility {
 
     /**
      * Creates a hashMap
-     * 
      * @param <T> type
      * @param listToMap list to convert
      * @return hashMap
@@ -75,9 +73,8 @@ public class Utility {
 
     /**
      * Remove items from hashMap
-     * 
      * @param <T> Type
-     * @param hashMap 
+     * @param hashMap
      * @param listToRemove list of items to remove
      * @return hashMap with items from the list removed.
      */
@@ -87,25 +84,46 @@ public class Utility {
         }
         return hashMap;
     }
-    
+
     /**
      * Encodes the decimals
-     * 
-     * @param decimals list of decimals to encode
-     * @param exponent e
-     * @param number n
-     * @return List of encoded decimals
+     * @param integers list of integers to encode
+     * @param exponent calculated e
+     * @param number prime number n
+     * @return List of encoded long values
      */
-    public static List<BigInteger> encodeContent(List<Integer> decimals, int exponent, int number){
-        List<BigInteger> encodedContent = new ArrayList<>();
+    public static List<Long> encodeContent(List<Integer> integers, int exponent, int number){
+        List<BigInteger> intermediateContents = new ArrayList<>();
         BigInteger e = new BigInteger(Integer.toString(exponent));
         BigInteger n = new BigInteger(Integer.toString(number));
-        
-        for (Integer decimalItem : decimals) {
+
+        for (Integer decimalItem : integers) {
             BigInteger b1 = new BigInteger(Integer.toString(decimalItem));
-            encodedContent.add(b1.modPow(e, n));
+            intermediateContents.add(b1.modPow(e, n));
         }
-        
-        return encodedContent;
+
+        List<Long> encodedContents = new ArrayList<>();
+        for (BigInteger encodedItem : intermediateContents){
+            encodedContents.add(encodedItem.longValue());
+        }
+        return encodedContents;
+    }
+
+    /**
+     * Creates a string from a list of items
+     * @param encodedList List of items
+     * @param <T> Type
+     * @return String of all the items separated with a ","
+     */
+    public static <T>String printEncodedMessage(List<T> encodedList){
+        StringBuilder sb = new StringBuilder();
+        for (Iterator<T> it = encodedList.iterator(); it.hasNext();) {
+            T encoded = it.next();
+            sb.append(encoded);
+            if(it.hasNext()){
+                sb.append(",");
+            }
+        }
+        return sb.toString();
     }
 }

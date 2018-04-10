@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pa3_decoder;
 
 import java.io.BufferedReader;
@@ -95,40 +90,40 @@ public class Utility {
 
     /**
      * Encodes the decimals
-     *
-     * @param decimals list of decimals to encode
-     * @param exponent e
-     * @param number n
-     * @return List of encoded decimals
+     * @param integers list of integers to encode
+     * @param exponent calculated e
+     * @param number prime number n
+     * @return List of encoded long values
      */
-    public static List<BigInteger> encodeContent(List<Integer> decimals, int exponent, int number) {
-        List<BigInteger> encodedContent = new ArrayList<>();
+    public static List<Long> encodeContent(List<Integer> integers, int exponent, int number){
+        List<BigInteger> intermediateContents = new ArrayList<>();
         BigInteger e = new BigInteger(Integer.toString(exponent));
         BigInteger n = new BigInteger(Integer.toString(number));
 
-        for (Integer decimalItem : decimals) {
+        for (Integer decimalItem : integers) {
             BigInteger b1 = new BigInteger(Integer.toString(decimalItem));
-            encodedContent.add(b1.modPow(e, n));
+            intermediateContents.add(b1.modPow(e, n));
         }
 
-        return encodedContent;
+        List<Long> encodedContents = new ArrayList<>();
+        for (BigInteger encodedItem : intermediateContents){
+            encodedContents.add(encodedItem.longValue());
+        }
+        return encodedContents;
     }
 
-    public static List<Character> decodeContent(List<Integer> decimals, int exponent, int number) {
-        List<BigInteger> decodedContent = new ArrayList<>();
-        BigInteger e = new BigInteger(Integer.toString(exponent));
-        BigInteger n = new BigInteger(Integer.toString(number));
-
-        for (Integer decimalItem : decimals) {
-            BigInteger b1 = new BigInteger(Integer.toString(decimalItem));
-            decodedContent.add(b1.modPow(e, n));
+    public static List<Character> decodeContent(List<Integer> integers, long d, int number) {
+        List<Character> decodedContent = new ArrayList<>();
+        for (Integer encodedInt : integers) {
+            char decoded = decodeInt(encodedInt.intValue(), d, number);
+            decodedContent.add(decoded);
         }
+        return decodedContent;
+    }
 
-        List<Character> charList = new ArrayList<>();
-
-        for (BigInteger bigInt : decodedContent) {
-            charList.add((char) Integer.parseInt(String.valueOf(bigInt)));
-        }
-        return charList;
+    public static char decodeInt(int encryptedString, long d, int n) {
+        return (char) Integer.parseInt(new BigInteger(Integer.toString(encryptedString))
+                .modPow(new BigInteger(Integer.toString(Long.valueOf(d).intValue())),
+                new BigInteger(Integer.toString(n))).toString());
     }
 }
