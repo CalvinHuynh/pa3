@@ -1,6 +1,5 @@
 package pa3_decoder;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +12,15 @@ import java.util.concurrent.TimeUnit;
 public class Decoder {
 
     public static void main(String[] args) throws Exception {
-        //TODO: accept prime (n), optional e (e) and filepath (c) from jar parameters.
-        String filePath = "C:\\Users\\VM\\Desktop\\pa3_message_encoded_from_paper.txt";
         int n = 23449;
         int e = 3;
-
+        String filePath = "C:\\Users\\Calvin\\Desktop\\pa3_message_encoded_from_paper.txt";
+        if(args.length >= 3){
+            n = Integer.parseInt(args[0]);
+            e = Integer.parseInt(args[1]);
+            filePath = args[2];
+        }
+        
         System.out.println("Output: n is: " + n);
         System.out.println("Output: e is: " + e);
         List<Long> pf = MathHelper.calculatePrimeFactors(n);
@@ -31,10 +34,12 @@ public class Decoder {
         long d = MathHelper.getDecryptionExponent(p, q, e);
         System.out.println("Output: d is: " + d);
 
+        // Initialize the stopwatch to measure decoding time
         Stopwatch stopwatch = new Stopwatch();
+        
         // Read from file
         String contentToDecode = Utility.readFile(filePath);
-
+        
         String[] items = contentToDecode.split(",");
         List<Integer> encodedItemList = new ArrayList<>();
 

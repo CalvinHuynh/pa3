@@ -85,7 +85,7 @@ public class MathHelper {
         // Add the available primes to the list
         List<Long> availableRelativePrimes = new ArrayList<>();
         for (int i = 0; i < listOfPrimes.size(); i++) {
-            availableRelativePrimes.add(listOfPrimes.get(i).longValue());
+            availableRelativePrimes.add(listOfPrimes.get(i));
         }
         // Remove the divisors from the hashmap.
         HashMap<Long, Long> map = Utility.toHashMap(availableRelativePrimes);

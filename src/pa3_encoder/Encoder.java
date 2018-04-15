@@ -1,8 +1,5 @@
 package pa3_encoder;
 
-import java.math.BigInteger;
-import java.sql.Time;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -14,8 +11,14 @@ public class Encoder {
 
     public static void main(String[] args) throws Exception {
         //TODO: accept prime (n), optional e (e) and filepath (m) from jar parameters.
-        String filePath = "C:\\Users\\VM\\Desktop\\pa3_message_to_encode.txt";
+        String filePath = "C:\\Users\\Calvin\\Desktop\\pa3_message_to_encode.txt";
         int n = 20291;
+        int e = 0;
+          if(args.length >= 3){
+            n = Integer.parseInt(args[0]);
+            e = Integer.parseInt(args[1]);
+            filePath = args[2];
+        }
 
         // Calculate prime factors from given prime
         List<Long> pf = MathHelper.calculatePrimeFactors(n);
