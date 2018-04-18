@@ -28,7 +28,7 @@ public class MathHelper {
     }
 
     /**
-     * Tries to retrieve the decryption exponent from given p and q
+     * Calculates the decryption exponent from given p and q
      * @param p prime 1
      * @param q prime 2
      * @param e exponent
