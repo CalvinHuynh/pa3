@@ -7,17 +7,21 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Calvin
  */
-public class Encoder {
+public class Main {
 
     public static void main(String[] args) throws Exception {
-        //TODO: accept prime (n), optional e (e) and filepath (m) from jar parameters.
         String filePath = "C:\\Users\\Calvin\\Desktop\\pa3_message_to_encode.txt";
         int n = 20291;
         int e = 0;
-          if(args.length >= 3){
+        if(args.length == 2){
+            n = Integer.parseInt(args[0]);
+            filePath = args[1];
+        } else if (args.length == 3){
             n = Integer.parseInt(args[0]);
             e = Integer.parseInt(args[1]);
             filePath = args[2];
+        } else {
+            System.out.println("Not enough arguments provided");
         }
 
         // Calculate prime factors from given prime
@@ -57,9 +61,9 @@ public class Encoder {
         // Display duration of time busy encoding message
         long elapsedTime = stopwatch.elapsedTime();
         System.out.println("Output: Amount of time busy encoding was:\n\t" +
-                TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " s\n\t"
-        + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " ms\n\t"
-        + TimeUnit.MICROSECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " μs\n\t"
-        + elapsedTime + " ns");
+                TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " seconds\n\t"
+        + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " milliseconds\n\t"
+        + TimeUnit.MICROSECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " microseconds\n\t"
+        + elapsedTime + " nanoseconds");
     }
 }

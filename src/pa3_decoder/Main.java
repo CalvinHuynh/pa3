@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Calvin
  */
-public class Decoder {
+public class Main {
 
     public static void main(String[] args) throws Exception {
         int n = 23449;
@@ -19,6 +19,8 @@ public class Decoder {
             n = Integer.parseInt(args[0]);
             e = Integer.parseInt(args[1]);
             filePath = args[2];
+        } else {
+            System.out.println("Not enough arguments provided");
         }
         
         System.out.println("Output: n is: " + n);
@@ -59,9 +61,9 @@ public class Decoder {
         System.out.println("");
         long elapsedTime = stopwatch.elapsedTime();
         System.out.println("Output: Amount of time busy encoding was:\n\t" +
-                TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " s\n\t"
-                + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " ms\n\t"
-                + TimeUnit.MICROSECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " μs\n\t"
-                + elapsedTime + " ns");
+                TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " seconds\n\t"
+                + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " milliseconds\n\t"
+                + TimeUnit.MICROSECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " microseconds\n\t"
+                + elapsedTime + " nanos");
     }
 }
