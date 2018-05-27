@@ -60,10 +60,10 @@ public class Main {
         
         System.out.println("");
         long elapsedTime = stopwatch.elapsedTime();
-        System.out.println("Output: Amount of time busy encoding was:\n\t" +
-                TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " seconds\n\t"
-                + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " milliseconds\n\t"
-                + TimeUnit.MICROSECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " microseconds\n\t"
+        System.out.println("Output: Time taken to decode the input was:\n\t" +
+                TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " seconds or\n\t"
+                + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " milliseconds or\n\t"
+                + TimeUnit.MICROSECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + " microseconds or\n\t"
                 + elapsedTime + " nanos");
     }
 }
