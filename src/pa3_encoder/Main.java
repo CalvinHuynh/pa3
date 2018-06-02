@@ -10,18 +10,18 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        String filePath = "C:\\Users\\Calvin\\Desktop\\pa3_message_to_encode.txt";
+        String content = "The starting point of all achievement is desire. ~Napolean Hill";
         int n = 20291;
         Long e = null;
         switch (args.length) {
             case 2:
                 n = Integer.parseInt(args[0]);
-                filePath = args[1];
+                content = args[1];
                 break;
             case 3:
                 n = Integer.parseInt(args[0]);
                 e = Long.parseLong(args[1]);
-                filePath = args[2];
+                content = args[2];
                 break;
             default:
                 System.out.println("Not enough arguments provided");
@@ -59,8 +59,13 @@ public class Main {
         System.out.println("Output of e is: " + e);
 
         // Read the content to encode
-        String contentToEncode = Utility.readFile(filePath);
-
+        String contentToEncode;
+        if(content.contains("\\")){
+            contentToEncode = Utility.readFile(content);
+        } else {
+            contentToEncode = content;
+        }
+        
         // Start the stopwatch to measure encoding time.
         Stopwatch stopwatch = new Stopwatch();
 

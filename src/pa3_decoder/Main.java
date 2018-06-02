@@ -14,11 +14,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         int n = 23449;
         int e = 3;
-        String filePath = "C:\\Users\\Calvin\\Desktop\\pa3_message_encoded_from_paper.txt";
+        String content = "C:\\Users\\Calvin\\Desktop\\pa3_message_encoded_from_paper.txt";
         if(args.length >= 3){
             n = Integer.parseInt(args[0]);
             e = Integer.parseInt(args[1]);
-            filePath = args[2];
+            content = args[2];
         } else {
             System.out.println("Not enough arguments provided");
         }
@@ -40,7 +40,12 @@ public class Main {
         Stopwatch stopwatch = new Stopwatch();
         
         // Read from file
-        String contentToDecode = Utility.readFile(filePath);
+        String contentToDecode;
+        if(content.contains("\\")){
+            contentToDecode = Utility.readFile(content);
+        } else {
+            contentToDecode = content;
+        }
         
         String[] items = contentToDecode.split(",");
         List<Integer> encodedItemList = new ArrayList<>();
