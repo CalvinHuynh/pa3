@@ -44,7 +44,6 @@ public class Utility {
 
     /**
      * Converts the string to the decimal representation
-     *
      * @param content string to convert
      * @return List of decimal representation
      */
@@ -59,7 +58,6 @@ public class Utility {
 
     /**
      * Creates a hashMap
-     *
      * @param <T> type
      * @param listToMap list to convert
      * @return hashMap
@@ -74,7 +72,6 @@ public class Utility {
 
     /**
      * Remove items from hashMap
-     *
      * @param <T> Type
      * @param hashMap
      * @param listToRemove list of items to remove
@@ -111,6 +108,13 @@ public class Utility {
         return encodedContents;
     }
 
+    /**
+     * Decodes the content of the list of integers
+     * @param integers list of integers to decode
+     * @param d decryption exponent
+     * @param number prime number
+     * @return returns the decoded characters
+     */
     public static List<Character> decodeContent(List<Integer> integers, long d, int number) {
         List<Character> decodedContent = new ArrayList<>();
         for (Integer encodedInt : integers) {
@@ -120,8 +124,15 @@ public class Utility {
         return decodedContent;
     }
 
-    public static char decodeInt(int encryptedString, long d, int n) {
-        return (char) Integer.parseInt(new BigInteger(Integer.toString(encryptedString))
+    /**
+     * Decodes the integer to a character
+     * @param encrypedInput the encrypted numeric input
+     * @param d decryption exponent
+     * @param n prime number
+     * @return the decoded character
+     */
+    public static char decodeInt(int encrypedInput, long d, int n) {
+        return (char) Integer.parseInt(new BigInteger(Integer.toString(encrypedInput))
                 .modPow(new BigInteger(Integer.toString(Long.valueOf(d).intValue())),
                 new BigInteger(Integer.toString(n))).toString());
     }
