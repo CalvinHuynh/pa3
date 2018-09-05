@@ -39,8 +39,8 @@ public class Utility {
             System.out.println(
                     "Unable to open file '"
                             + fileName + "'");
+            throw new FileNotFoundException(ex.getMessage());
         }
-        return "";
     }
 
     /**

@@ -15,9 +15,8 @@ import java.util.List;
  */
 public class Utility {
 
-    /**
+      /**
      * Read content from filename
-     *
      * @param fileName name of the file including the absolute path
      * @return string content
      * @throws IOException
@@ -38,9 +37,9 @@ public class Utility {
         } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file '"
-                    + fileName + "'");
+                            + fileName + "'");
+            throw new FileNotFoundException(ex.getMessage());
         }
-        return "";
     }
 
     /**
